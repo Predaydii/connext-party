@@ -44,7 +44,6 @@ export default function SmartImage({
         fill
         sizes={sizes}
         priority={priority}
-        unoptimized
         className={`${className} transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
         onLoad={() => setLoaded(true)}
         onError={() => setFailed(true)}
