@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import SmartImage from "@/components/SmartImage";
 
-// วันเลือกตั้ง 15 กรกฎาคม 2569 (พ.ศ.) = 2026-07-15 00:00 เวลาท้องถิ่น
-const ELECTION_DATE = new Date("2026-07-10T00:11:00");
+// วันเลือกตั้ง 10 กรกฎาคม 2569 (พ.ศ.) เวลา 11:00 น. เวลาท้องถิ่น
+const ELECTION_DATE = new Date("2026-07-10T11:00:00");
 
 type TimeLeft = {
   days: number;
