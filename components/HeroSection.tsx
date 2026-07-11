@@ -13,7 +13,7 @@ type HeroPerson = {
 };
 
 const HERO_PEOPLE: HeroPerson[] = [
-  { id: "p1", name: "ไบรท์", title: "ประธานสภานักเรียน", image: "/images/hero/hero-1.png", placeholderClass: "from-connext-secondary to-connext-primary" },
+  { id: "p1", name: "ไบร์ท", title: "ประธานสภานักเรียน", image: "/images/hero/hero-1.png", placeholderClass: "from-connext-secondary to-connext-primary" },
   { id: "p2", name: "เดย์", title: "รองประธานฯ ฝ่ายบริหารวิชาการ", image: "/images/hero/hero-2.png", placeholderClass: "from-connext-light to-connext-secondary" },
   { id: "p3", name: "ฟิล์ม", title: "รองประธานฯ ฝ่ายบริหารกิจกรรม", image: "/images/hero/hero-3.png", placeholderClass: "from-blue-400 to-connext-primary" },
   { id: "p4", name: "อาเธอร์", title: "รองประธานฯ ฝ่ายบริหารทั่วไป", image: "/images/hero/hero-4.png", placeholderClass: "from-sky-300 to-connext-secondary" },
@@ -112,12 +112,14 @@ export default function HeroSection() {
             const person = HERO_PEOPLE[index];
             const isCenter = offset === 0;
             const isEdge = Math.abs(offset) === 2;
+            // รูปประธานฯ (p1) สูงกว่าคนอื่น — ย่อลงเล็กน้อยให้หัวเสมอกัน
+            const personScale = person.id === "p1" ? 0.92 : 1;
             return (
               <motion.div
                 key={person.id}
                 layout
                 initial={{ opacity: 0 }}
-                animate={{ scale: isCenter ? 1.18 : 1, opacity: 1 }}
+                animate={{ scale: (isCenter ? 1.18 : 1) * personScale, opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.9 }}
                 style={{ transformOrigin: "bottom center", zIndex: 30 - Math.abs(offset) * 10 }}

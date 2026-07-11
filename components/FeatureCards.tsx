@@ -14,7 +14,7 @@ type FeatureCard = {
 const FEATURE_CARDS: FeatureCard[] = [
   {
     id: "culture",
-    title: "ส่งเสริมกิจกรรม เปิดกว้างทุกความเห็น",
+    title: "เปิดกว้างทุกความเห็น",
     description:
       'จัดทำแบบสำรวจความสนใจ เช่น คอนเสิร์ต, E-Sport, บาสเกตบอลประเพณี, ฟุตบอลประเพณี, Cover Dance',
     media: "image",
