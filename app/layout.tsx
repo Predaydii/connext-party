@@ -11,34 +11,8 @@ const notoSansThai = Noto_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://connext-party.space"),
-  title: "พรรคคอนเน็กซ์ | Connext Party",
-  description:
-    "ผู้นำพลังใหม่ พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้",
-  openGraph: {
-    title: "พรรคคอนเน็กซ์ | Connext Party",
-    description:
-      "ผู้นำพลังใหม่ พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้",
-    url: "https://connext-party.space",
-    siteName: "Connext Party",
-    locale: "th_TH",
-    type: "website",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "พรรคคอนเน็กซ์ - Connext Party",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "พรรคคอนเน็กซ์ | Connext Party",
-    description:
-      "ผู้นำพลังใหม่ พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้",
-    images: ["/og.png"],
-  },
+  title: "พรรคคอนเน็กซ์ - Connext Party",
+  description: "ผู้นำพลังใหม่ ที่พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้",
 };
 
 export default function RootLayout({

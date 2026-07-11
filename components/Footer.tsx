@@ -21,14 +21,24 @@ export default function Footer() {
           </div>
         </div>
 
-        <Link
-          href="https://www.instagram.com/connext.party/?utm_source=ig_web_button_share_sheet"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ig-button inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-connext-primary transition-transform hover:scale-105 active:scale-95"
-        >
-          ติดตามเราบน Instagram
-        </Link>
+        <div className="flex flex-col items-center gap-3 sm:flex-row">
+          <Link
+            href="https://www.instagram.com/connext.party/?utm_source=ig_web_button_share_sheet"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ig-button inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-connext-primary transition-transform hover:scale-105 active:scale-95"
+          >
+            ติดตามเราบน Instagram
+          </Link>
+          <Link
+            href="https://www.facebook.com/share/1L5VBbTQHJ/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ig-button inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-connext-primary transition-transform hover:scale-105 active:scale-95 [animation-delay:-1.2s]"
+          >
+            ติดตามเราบน Facebook
+          </Link>
+        </div>
       </div>
     </footer>
   );

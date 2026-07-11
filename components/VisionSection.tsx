@@ -39,9 +39,6 @@ export default function VisionSection() {
             className="glow-button group mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-connext-primary-contrast shadow-lg shadow-connext-primary/30 transition duration-300 hover:scale-110 hover:shadow-xl hover:shadow-connext-secondary/50 active:scale-95"
           >
             ประวัติแกนนำ
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5">
-              →
-            </span>
           </Link>
         </div>
 
@@ -106,9 +103,6 @@ export default function VisionSection() {
             className="glow-button group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-connext-primary-contrast shadow-lg shadow-connext-primary/30 transition duration-300 hover:scale-110 hover:shadow-xl hover:shadow-connext-secondary/50 active:scale-95"
           >
             ดูนโยบายทั้งหมด
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5">
-              →
-            </span>
           </Link>
         </div>
       </div>
