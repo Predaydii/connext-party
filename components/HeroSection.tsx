@@ -112,12 +112,14 @@ export default function HeroSection() {
             const person = HERO_PEOPLE[index];
             const isCenter = offset === 0;
             const isEdge = Math.abs(offset) === 2;
+            // รูปประธานฯ (p1) สูงกว่าคนอื่น — ย่อลงเล็กน้อยให้หัวเสมอกัน
+            const personScale = person.id === "p1" ? 0.92 : 1;
             return (
               <motion.div
                 key={person.id}
                 layout
                 initial={{ opacity: 0 }}
-                animate={{ scale: isCenter ? 1.18 : 1, opacity: 1 }}
+                animate={{ scale: (isCenter ? 1.18 : 1) * personScale, opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.9 }}
                 style={{ transformOrigin: "bottom center", zIndex: 30 - Math.abs(offset) * 10 }}

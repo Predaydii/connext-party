@@ -10,9 +10,30 @@ const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
 });
 
+const SITE_TITLE = "พรรคคอนเน็กซ์ - Connext Party";
+const SITE_DESCRIPTION =
+  "ผู้นำพลังใหม่ ที่พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้";
+
 export const metadata: Metadata = {
-  title: "พรรคคอนเน็กซ์ - Connext Party",
-  description: "ผู้นำพลังใหม่ ที่พร้อมสร้างสรรค์สิ่งดี สานต่อวัฒนธรรม ปฏิรูปการบริหารจัดการด้วยเทคโนโลยีดิจิทัล และสร้างวัฒนธรรมองค์กรที่ยั่งยืน เพราะเราเชื่อว่า ตราษฯ เป็นได้มากกว่านี้",
+  metadataBase: new URL("https://connext-party.space"),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  // openGraph/twitter คือตัวกำหนดการ์ดพรีวิวตอนแชร์ลิงก์ — ถ้าลบบล็อกนี้ รูปแบนเนอร์จะหาย
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "https://connext-party.space",
+    siteName: "Connext Party",
+    locale: "th_TH",
+    type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE_TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
