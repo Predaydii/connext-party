@@ -18,7 +18,7 @@ const FEATURE_CARDS: FeatureCard[] = [
     description:
       'จัดทำแบบสำรวจความสนใจ เช่น คอนเสิร์ต, E-Sport, บาสเกตบอลประเพณี, ฟุตบอลประเพณี, Cover Dance',
     media: "image",
-    src: "/images/features/culture.jpg",
+    src: "/images/features/culture.png",
     placeholderClass: "from-blue-900 via-connext-primary to-connext-secondary",
   },
   {
