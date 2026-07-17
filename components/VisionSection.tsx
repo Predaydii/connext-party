@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import PolicyStatusBadge from "@/components/PolicyStatusBadge";
 import SmartImage from "@/components/SmartImage";
 import { VISION_IMAGES } from "@/lib/data/vision";
 
@@ -75,6 +76,8 @@ export default function VisionSection() {
                     />
                   </motion.div>
                 </AnimatePresence>
+
+                <PolicyStatusBadge no={imageIndex + 1} />
 
                 {/* จุดบอกตำแหน่งสไลด์ — เฉพาะการ์ดเดี่ยวบนมือถือ */}
                 {cardOffset === 0 && (
