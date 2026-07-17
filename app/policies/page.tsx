@@ -10,7 +10,7 @@ export default function PoliciesPage() {
   return (
     <>
       <PageHero
-        title="10 นโยบายทำได้จริง"
+        title="นโยบายทำได้จริง"
         subtitle="ผ่านการปรึกษาฝ่ายบริหารและคุณครูผู้เกี่ยวข้อง"
         image="/images/page-hero/policy.png"
       />

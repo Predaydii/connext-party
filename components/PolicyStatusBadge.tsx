@@ -31,13 +31,13 @@ export default function PolicyStatusBadge({
   if (IN_PROGRESS_POLICIES.includes(no)) {
     return (
       <span
-        className={`badge-progress absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-amber-400 font-bold text-amber-950 shadow-lg ${sizeClass}`}
+        className={`absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-amber-400 font-bold text-amber-950 shadow-lg ${sizeClass}`}
       >
         <span
           aria-hidden
-          className={`badge-progress-dot rounded-full bg-amber-800 ${large ? "h-2.5 w-2.5" : "h-2 w-2"}`}
+          className={`rounded-full bg-amber-800 ${large ? "h-2.5 w-2.5" : "h-2 w-2"}`}
         />
-        อยู่ระหว่างดำเนินการ
+        กำลังดำเนินการ
       </span>
     );
   }

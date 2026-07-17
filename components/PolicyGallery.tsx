@@ -30,21 +30,34 @@ export default function PolicyGallery() {
 
   return (
     <>
-      {/* แถบสรุปสถานะนโยบาย */}
-      <div className="mb-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-        <span className="inline-flex items-center gap-2 rounded-full bg-connext-primary px-5 py-2.5 text-sm font-bold text-white shadow-md">
-          {VISION_IMAGES.length} นโยบาย
-        </span>
-        <span className="badge-done inline-flex items-center gap-2 rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-white shadow-md">
-          <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden>
-            <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" />
-          </svg>
-          ทำแล้ว {COMPLETED_POLICIES.length}
-        </span>
-        <span className="badge-progress inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-bold text-amber-950 shadow-md">
-          <span aria-hidden className="badge-progress-dot h-2.5 w-2.5 rounded-full bg-amber-800" />
-          อยู่ระหว่างดำเนินการ {IN_PROGRESS_POLICIES.length}
-        </span>
+      {/* แถบสรุปสถานะนโยบาย — ตัวเลขใหญ่ + คำอธิบาย คั่นด้วยเส้นแนวตั้ง */}
+      <div className="mb-12">
+        <p className="text-center text-sm tracking-[0.3em] text-gray-400">
+          ความคืบหน้านโยบาย
+        </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-0">
+          {[
+            { value: `${VISION_IMAGES.length}`, line1: "นโยบาย", line2: "ทำได้จริง" },
+            { value: `${COMPLETED_POLICIES.length}`, line1: "นโยบาย", line2: "ทำแล้ว" },
+            { value: `${IN_PROGRESS_POLICIES.length}`, line1: "นโยบาย", line2: "กำลังดำเนินการ" },
+          ].map((stat, i) => (
+            <div
+              key={stat.line2}
+              className={`flex items-center gap-3 px-10 sm:px-14 ${
+                i > 0 ? "sm:border-l sm:border-gray-200" : ""
+              }`}
+            >
+              <span className="text-5xl font-extrabold text-connext-primary sm:text-6xl">
+                {stat.value}
+              </span>
+              <span className="text-sm leading-snug text-gray-500">
+                {stat.line1}
+                <br />
+                {stat.line2}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
