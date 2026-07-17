@@ -35,7 +35,7 @@ export default function PolicyStatusBadge({
       >
         <span
           aria-hidden
-          className={`rounded-full bg-amber-800 ${large ? "h-2.5 w-2.5" : "h-2 w-2"}`}
+          className={`badge-progress-dot rounded-full bg-amber-800 ${large ? "h-2.5 w-2.5" : "h-2 w-2"}`}
         />
         กำลังดำเนินการ
       </span>

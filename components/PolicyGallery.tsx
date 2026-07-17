@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import PolicyStatusBadge from "@/components/PolicyStatusBadge";
 import SmartImage from "@/components/SmartImage";
-import { COMPLETED_POLICIES, IN_PROGRESS_POLICIES, VISION_IMAGES } from "@/lib/data/vision";
+import { VISION_IMAGES } from "@/lib/data/vision";
 
 const PLACEHOLDER_CLASSES = [
   "from-connext-primary to-connext-secondary",
@@ -30,36 +30,6 @@ export default function PolicyGallery() {
 
   return (
     <>
-      {/* แถบสรุปสถานะนโยบาย — ตัวเลขใหญ่ + คำอธิบาย คั่นด้วยเส้นแนวตั้ง */}
-      <div className="mb-12">
-        <p className="text-center text-sm tracking-[0.3em] text-gray-400">
-          ความคืบหน้านโยบาย
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-0">
-          {[
-            { value: `${VISION_IMAGES.length}`, line1: "นโยบาย", line2: "ทำได้จริง" },
-            { value: `${COMPLETED_POLICIES.length}`, line1: "นโยบาย", line2: "ทำแล้ว" },
-            { value: `${IN_PROGRESS_POLICIES.length}`, line1: "นโยบาย", line2: "กำลังดำเนินการ" },
-          ].map((stat, i) => (
-            <div
-              key={stat.line2}
-              className={`flex items-center gap-3 px-10 sm:px-14 ${
-                i > 0 ? "sm:border-l sm:border-gray-200" : ""
-              }`}
-            >
-              <span className="text-5xl font-extrabold text-connext-primary sm:text-6xl">
-                {stat.value}
-              </span>
-              <span className="text-sm leading-snug text-gray-500">
-                {stat.line1}
-                <br />
-                {stat.line2}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
         {VISION_IMAGES.map((image, i) => (
           <button
