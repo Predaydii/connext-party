@@ -68,7 +68,7 @@ export default function CountdownSection() {
           นับถอยหลังวันเลือกตั้ง
         </h2>
         <p className="mt-3 text-lg font-semibold text-white/90 sm:text-2xl">
-          อยากเห็นสภาหน้าใหม่ ทำงานเป็น เลือกพวกเราเบอร์ 1
+          เลือกตั้งในรอบ 3 ปี #ก้าวไกลด้วยพลังใหม่
         </p>
 
         <div className="mt-10 flex items-start gap-3 sm:mt-12 sm:gap-6">

@@ -79,6 +79,25 @@ export default function HeroSection() {
         <div className="hero-blob absolute bottom-[12%] left-[20%] h-80 w-80 rounded-full bg-connext-secondary/50 blur-3xl [animation-delay:-6s]" />
         <div className="hero-blob-slow absolute left-[55%] top-[5%] h-56 w-56 rounded-full bg-sky-300/30 blur-3xl [animation-delay:-4s]" />
 
+        {/* ประกายวิบวับ (จุดดาวกะพริบสลับจังหวะ) */}
+        {[
+          ["left-[12%]", "top-[22%]", "h-2 w-2", "0s"],
+          ["left-[28%]", "top-[12%]", "h-1.5 w-1.5", "-0.7s"],
+          ["left-[45%]", "top-[30%]", "h-2.5 w-2.5", "-1.4s"],
+          ["left-[63%]", "top-[16%]", "h-1.5 w-1.5", "-2.1s"],
+          ["left-[78%]", "top-[28%]", "h-2 w-2", "-2.8s"],
+          ["left-[88%]", "top-[10%]", "h-1.5 w-1.5", "-0.4s"],
+          ["left-[8%]", "top-[48%]", "h-1.5 w-1.5", "-1.8s"],
+          ["left-[92%]", "top-[52%]", "h-2 w-2", "-2.5s"],
+          ["left-[35%]", "top-[6%]", "h-1 w-1", "-1.1s"],
+          ["left-[70%]", "top-[42%]", "h-1 w-1", "-3.2s"],
+        ].map(([left, top, size, delay]) => (
+          <span
+            key={`${left}-${top}`}
+            className={`hero-sparkle absolute ${left} ${top} ${size} rounded-full bg-white`}
+            style={{ animationDelay: delay }}
+          />
+        ))}
       </div>
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center px-4 pt-10 sm:px-6 sm:pt-14">

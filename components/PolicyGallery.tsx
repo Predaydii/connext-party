@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import SmartImage from "@/components/SmartImage";
-import { VISION_IMAGES } from "@/lib/data/vision";
+import { COMPLETED_POLICIES, VISION_IMAGES } from "@/lib/data/vision";
 
 const PLACEHOLDER_CLASSES = [
   "from-connext-primary to-connext-secondary",
@@ -48,6 +48,15 @@ export default function PolicyGallery() {
             <span className="absolute inset-0 flex items-center justify-center bg-connext-primary/0 text-sm font-semibold text-white opacity-0 transition group-hover:bg-connext-primary/40 group-hover:opacity-100">
               คลิกเพื่อดูเต็มจอ
             </span>
+            {/* ป้ายนโยบายที่ทำสำเร็จแล้ว */}
+            {COMPLETED_POLICIES.includes(i + 1) && (
+              <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-green-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg">
+                <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-current" aria-hidden>
+                  <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" />
+                </svg>
+                ทำแล้ว
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -77,6 +86,14 @@ export default function PolicyGallery() {
                 alt={`นโยบายพรรคคอนเน็กซ์ ${openIndex + 1}`}
                 sizes="92vw"
               />
+              {COMPLETED_POLICIES.includes(openIndex + 1) && (
+                <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-white shadow-lg">
+                  <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden>
+                    <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" />
+                  </svg>
+                  ทำแล้ว
+                </span>
+              )}
               <button
                 type="button"
                 onClick={() => setOpenIndex(null)}
