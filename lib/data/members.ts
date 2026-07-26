@@ -21,7 +21,7 @@ export const classGroups: ClassGroup[] = [
   { className: "ม.5/1", members: makeMembers("1", 2) },
   { className: "ม.5/2", members: makeMembers("2", 6) },
   { className: "ม.5/3", members: makeMembers("3", 2) },
-  { className: "ม.5/4", members: makeMembers("4", 5) },
+  { className: "ม.5/4", members: makeMembers("4", 6) },
   { className: "ม.5/7", members: makeMembers("7", 8) },
   { className: "ระดับชั้นอื่น", members: makeMembers("0", 2) },
 ];
