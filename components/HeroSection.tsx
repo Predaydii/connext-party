@@ -30,7 +30,7 @@ function PersonImage({ person }: { person: HeroPerson }) {
         src={person.image}
         alt={person.name}
         className="object-contain object-bottom"
-        sizes="(min-width: 640px) 24vw, 58vw"
+        sizes="(min-width: 640px) and (orientation: landscape) 24vw, (min-width: 640px) 36vw, 58vw"
         priority
       />
     </div>
@@ -45,12 +45,14 @@ export default function HeroSection() {
 
   const go = (dir: 1 | -1) => setActiveIndex((i) => (i + dir + total) % total);
 
-  // บนมือถือ render แค่ 3 คน (ตัดการ์ด edge ออกจาก DOM ไปเลย) —
+  // โชว์ 5 คนเฉพาะจอกว้างแนวนอน — จอแนวตั้ง (มือถือ/iPad ตั้ง) เหลือ 3 คน (ตัดการ์ด edge ออกจาก DOM ไปเลย)
   // ถ้าใช้ display:none การ์ดที่โผล่มาใหม่จะถูก layout-animate จากมุมจอเหมือนพุ่งลงมาจากฟ้า
-  const [isDesktop, setIsDesktop] = useState(false);
+  // เช็คทั้งความกว้างและ orientation เพราะ iPad แนวตั้งกว้างพอผ่าน sm แต่การ์ด 40% จะเล็กเมื่อเทียบกับความสูงจอ
+  // ต้องตรงกับ variant sm:landscape: ในคลาสของการ์ดด้านล่าง
+  const [isWide, setIsWide] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 640px)");
-    const sync = () => setIsDesktop(mq.matches);
+    const mq = window.matchMedia("(min-width: 640px) and (orientation: landscape)");
+    const sync = () => setIsWide(mq.matches);
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
@@ -68,7 +70,7 @@ export default function HeroSection() {
     if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
   };
 
-  const offsets = isDesktop ? [-2, -1, 0, 1, 2] : [-1, 0, 1];
+  const offsets = isWide ? [-2, -1, 0, 1, 2] : [-1, 0, 1];
 
   return (
     <section className="relative flex min-h-[calc(100dvh-64px)] flex-col overflow-hidden bg-gradient-to-b from-connext-primary via-connext-secondary to-connext-light">
@@ -143,11 +145,18 @@ export default function HeroSection() {
                 transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.9 }}
                 style={{ transformOrigin: "bottom center", zIndex: 30 - Math.abs(offset) * 10 }}
                 onClick={() => !isCenter && setActiveIndex(index)}
-                className={`w-[92%] shrink-0 sm:w-[40%] ${isEdge ? "hidden sm:block" : ""} ${
+                // ความกว้างการ์ด 3 ระดับ: มือถือ 92% / iPad แนวตั้ง 60% (3 คน) / จอกว้างแนวนอน 40% (5 คน)
+                className={`w-[92%] shrink-0 sm:w-[60%] sm:landscape:w-[40%] ${isEdge ? "hidden sm:block" : ""} ${
                   isCenter
                     ? ""
                     : "cursor-pointer opacity-95 transition-[filter] duration-300 hover:brightness-110"
-                } ${offset !== 0 ? (offset < 0 ? "-mr-[48%] sm:-mr-[23%]" : "-ml-[48%] sm:-ml-[23%]") : ""}`}
+                } ${
+                  offset !== 0
+                    ? offset < 0
+                      ? "-mr-[48%] sm:-mr-[33%] sm:landscape:-mr-[23%]"
+                      : "-ml-[48%] sm:-ml-[33%] sm:landscape:-ml-[23%]"
+                    : ""
+                }`}
               >
                 <PersonImage person={person} />
               </motion.div>
