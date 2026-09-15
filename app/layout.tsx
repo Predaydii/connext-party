@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -47,6 +48,8 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        {/* Vercel Web Analytics — ยิงข้อมูลเฉพาะตอน deploy บน Vercel, ตอน dev ไม่ส่งอะไร */}
+        <Analytics />
       </body>
     </html>
   );
