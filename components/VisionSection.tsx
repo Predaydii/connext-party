@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import PolicyStatusBadge from "@/components/PolicyStatusBadge";
 import SmartImage from "@/components/SmartImage";
 import { VISION_IMAGES } from "@/lib/data/vision";
+import type { PolicyStatus } from "@/lib/content/types";
 
 const PLACEHOLDER_CLASSES = [
   "from-connext-primary to-connext-secondary",
@@ -14,7 +15,11 @@ const PLACEHOLDER_CLASSES = [
   "from-blue-900 to-connext-secondary",
 ];
 
-export default function VisionSection() {
+export default function VisionSection({
+  policyStatuses,
+}: {
+  policyStatuses: Record<string, PolicyStatus>;
+}) {
   const [current, setCurrent] = useState(0);
 
   // สไลด์รูปอัตโนมัติทุก 3.5 วินาที
@@ -77,7 +82,9 @@ export default function VisionSection() {
                   </motion.div>
                 </AnimatePresence>
 
-                <PolicyStatusBadge no={imageIndex + 1} />
+                <PolicyStatusBadge
+                  status={policyStatuses[String(imageIndex + 1)] ?? "none"}
+                />
 
                 {/* จุดบอกตำแหน่งสไลด์ — เฉพาะการ์ดเดี่ยวบนมือถือ */}
                 {cardOffset === 0 && (

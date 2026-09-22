@@ -4,7 +4,15 @@ import PageHero from "@/components/PageHero";
 import { classGroups } from "@/lib/data/members";
 
 export const metadata: Metadata = {
-  title: "สมาชิกพรรค | พรรคคอนเน็กซ์",
+  title: "สมาชิกพรรค",
+  description:
+    "26 คนทำงานของพรรคคอนเน็กซ์ (Connext Party) มากความสามารถ เพรียบพร้อมประสบการณ์ จากทุกห้องเรียนในโรงเรียนตราษตระการคุณ",
+  alternates: { canonical: "/members" },
+  openGraph: {
+    title: "สมาชิกพรรค | พรรคคอนเน็กซ์ Connext Party",
+    description: "26 คนทำงานของพรรคคอนเน็กซ์ มากความสามารถ เพรียบพร้อมประสบการณ์",
+    url: "/members",
+  },
 };
 
 export default function MembersPage() {

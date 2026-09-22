@@ -2,7 +2,16 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "เกี่ยวกับพรรค | พรรคคอนเน็กซ์",
+  title: "เกี่ยวกับพรรค",
+  description:
+    "ทำความรู้จักพรรคคอนเน็กซ์ (Connext Party) — วิสัยทัศน์ แนวทางการบริหารจัดการอย่างเป็นระบบด้วยเทคโนโลยีดิจิทัลและการมีส่วนร่วม โรงเรียนตราษตระการคุณ",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "เกี่ยวกับพรรค | พรรคคอนเน็กซ์ Connext Party",
+    description:
+      "ทำความรู้จักพรรคคอนเน็กซ์ — วิสัยทัศน์และแนวทางการบริหารจัดการอย่างเป็นระบบ",
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

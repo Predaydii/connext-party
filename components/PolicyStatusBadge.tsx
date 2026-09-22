@@ -1,17 +1,17 @@
-import { COMPLETED_POLICIES, IN_PROGRESS_POLICIES } from "@/lib/data/vision";
+import type { PolicyStatus } from "@/lib/content/types";
 
-/* ป้ายสถานะนโยบาย (no = เลขตามชื่อไฟล์ vision-X)
-   ทำแล้ว = เขียวพร้อมวงแหวนเรือง / อยู่ระหว่างดำเนินการ = เหลืองพร้อมจุดกะพริบ */
+/* ป้ายสถานะนโยบาย — สถานะมาจากหน้าแอดมิน
+   ทำแล้ว = เขียวพร้อมวงแหวนเรือง / กำลังดำเนินการ = เหลืองพร้อมจุดกะพริบ */
 export default function PolicyStatusBadge({
-  no,
+  status,
   large = false,
 }: {
-  no: number;
+  status: PolicyStatus;
   large?: boolean;
 }) {
   const sizeClass = large ? "px-4 py-2 text-sm" : "px-3 py-1.5 text-xs";
 
-  if (COMPLETED_POLICIES.includes(no)) {
+  if (status === "done") {
     return (
       <span
         className={`badge-done absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-green-500 font-bold text-white shadow-lg ${sizeClass}`}
@@ -28,7 +28,7 @@ export default function PolicyStatusBadge({
     );
   }
 
-  if (IN_PROGRESS_POLICIES.includes(no)) {
+  if (status === "progress") {
     return (
       <span
         className={`absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-amber-400 font-bold text-amber-950 shadow-lg ${sizeClass}`}

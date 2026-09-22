@@ -1,5 +1,5 @@
 import SmartImage from "@/components/SmartImage";
-import type { Leader } from "@/lib/data/leaders";
+import type { LeaderContent } from "@/lib/content/types";
 
 function BulletList({ items }: { items: string[] }) {
   return (
@@ -14,7 +14,7 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
-export default function LeaderProfileCard({ leader }: { leader: Leader }) {
+export default function LeaderProfileCard({ leader }: { leader: LeaderContent }) {
   return (
     <article className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-[1fr_2fr] md:gap-12">
       {/* รูป 4:5 — แทน placeholder ด้วย <Image> เมื่อมีรูปจริงใน public/images/leaders */}

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PolicyStatusBadge from "@/components/PolicyStatusBadge";
 import SmartImage from "@/components/SmartImage";
 import { VISION_IMAGES } from "@/lib/data/vision";
+import type { PolicyStatus } from "@/lib/content/types";
 
 const PLACEHOLDER_CLASSES = [
   "from-connext-primary to-connext-secondary",
@@ -13,7 +14,11 @@ const PLACEHOLDER_CLASSES = [
   "from-blue-900 to-connext-secondary",
 ];
 
-export default function PolicyGallery() {
+export default function PolicyGallery({
+  policyStatuses,
+}: {
+  policyStatuses: Record<string, PolicyStatus>;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   // ปิดด้วย Esc และล็อก scroll ระหว่างเปิดดู
@@ -49,7 +54,7 @@ export default function PolicyGallery() {
             <span className="absolute inset-0 flex items-center justify-center bg-connext-primary/0 text-sm font-semibold text-white opacity-0 transition group-hover:bg-connext-primary/40 group-hover:opacity-100">
               คลิกเพื่อดูเต็มจอ
             </span>
-            <PolicyStatusBadge no={i + 1} />
+            <PolicyStatusBadge status={policyStatuses[String(i + 1)] ?? "none"} />
           </button>
         ))}
       </div>
@@ -79,7 +84,10 @@ export default function PolicyGallery() {
                 alt={`นโยบายพรรคคอนเน็กซ์ ${openIndex + 1}`}
                 sizes="92vw"
               />
-              <PolicyStatusBadge no={openIndex + 1} large />
+              <PolicyStatusBadge
+                status={policyStatuses[String(openIndex + 1)] ?? "none"}
+                large
+              />
               <button
                 type="button"
                 onClick={() => setOpenIndex(null)}

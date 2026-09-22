@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/leaders", label: "ประวัติแกนนำ" },
   { href: "/members", label: "สมาชิกพรรค" },
   { href: "/policies", label: "นโยบายพรรค" },
+  { href: "/news", label: "ข่าวกิจกรรม" },
 ];
 
 export default function Navbar() {
