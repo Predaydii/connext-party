@@ -63,6 +63,10 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  // ยืนยันความเป็นเจ้าของเว็บกับ Google Search Console — ห้ามลบ ไม่งั้นการยืนยันจะหลุด
+  verification: {
+    google: "WaCmO1kUwoe0DYi_u2fgIvLFmtiQKgIcbh8r5M4F2Q0",
+  },
 };
 
 export default function RootLayout({
