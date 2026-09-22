@@ -1,6 +1,6 @@
 "use server";
 
-import { put } from "@vercel/blob";
+import { del, put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
@@ -59,6 +59,22 @@ function refreshSite(): void {
   revalidatePath("/", "layout");
 }
 
+/* ลบรูปที่ไม่ถูกอ้างถึงแล้วออกจาก Blob กันพื้นที่เก็บบวมจากรูปกำพร้า
+   ลบเฉพาะไฟล์ที่เราอัปเอง (URL ของ Blob) — รูปใน public/ ต้องไม่โดนแตะ
+   ถ้าลบไม่สำเร็จก็ปล่อยผ่าน เพราะข้อมูลหลักบันทึกไปแล้ว ไม่ควรให้ล้มทั้งงาน */
+async function deleteRemovedImages(before: string[], after: string[]): Promise<void> {
+  const removed = before.filter(
+    (src) => !after.includes(src) && src.includes(".public.blob.vercel-storage.com")
+  );
+  if (removed.length === 0) return;
+
+  try {
+    await del(removed);
+  } catch (error) {
+    console.error("[content] ลบรูปเก่าออกจาก Blob ไม่สำเร็จ:", error);
+  }
+}
+
 // ---------------------------------------------------------------- เข้า/ออกระบบ
 
 export async function loginAction(
@@ -93,11 +109,13 @@ export async function saveWelcomeImagesAction(
       formData.getAll("images") as File[],
       "welcome"
     );
+    const welcomeImages = [...kept, ...uploaded];
 
-    await saveContent({ ...content, welcomeImages: [...kept, ...uploaded] });
+    await saveContent({ ...content, welcomeImages });
+    await deleteRemovedImages(content.welcomeImages, welcomeImages);
     refreshSite();
 
-    const total = kept.length + uploaded.length;
+    const total = welcomeImages.length;
     return {
       ok: true,
       message: total === 0
@@ -169,8 +187,84 @@ export async function saveLeaderAction(
     leaders[index] = updated;
 
     await saveContent({ ...content, leaders });
+    if (photo && content.leaders[index].image) {
+      await deleteRemovedImages([content.leaders[index].image], [photo]);
+    }
     refreshSite();
     return { ok: true, message: `บันทึกประวัติ ${updated.name || "แกนนำ"} แล้ว` };
+  } catch (error) {
+    return { ok: false, message: (error as Error).message };
+  }
+}
+
+export async function addLeaderAction(): Promise<ActionState> {
+  try {
+    requireAuth();
+    const content = await getContentFresh();
+
+    const leader: LeaderContent = {
+      id: `leader-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      name: "แกนนำคนใหม่",
+      position: "",
+      image: "",
+      experience: [],
+      achievements: [],
+    };
+
+    await saveContent({ ...content, leaders: [...content.leaders, leader] });
+    refreshSite();
+    return { ok: true, message: "เพิ่มแกนนำแล้ว — กดชื่อเพื่อแก้ข้อมูล" };
+  } catch (error) {
+    return { ok: false, message: (error as Error).message };
+  }
+}
+
+export async function deleteLeaderAction(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  try {
+    requireAuth();
+    const content = await getContentFresh();
+    const id = String(formData.get("id") ?? "");
+    const removed = content.leaders.find((leader) => leader.id === id);
+
+    await saveContent({
+      ...content,
+      leaders: content.leaders.filter((leader) => leader.id !== id),
+    });
+    if (removed?.image) await deleteRemovedImages([removed.image], []);
+    refreshSite();
+    return { ok: true, message: "ลบแกนนำแล้ว" };
+  } catch (error) {
+    return { ok: false, message: (error as Error).message };
+  }
+}
+
+/** สลับลำดับแกนนำขึ้น/ลง — ลำดับนี้คือลำดับที่แสดงในหน้าประวัติแกนนำ */
+export async function moveLeaderAction(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  try {
+    requireAuth();
+    const content = await getContentFresh();
+
+    const id = String(formData.get("id") ?? "");
+    const direction = String(formData.get("direction") ?? "");
+    const from = content.leaders.findIndex((leader) => leader.id === id);
+    const to = direction === "up" ? from - 1 : from + 1;
+    if (from === -1 || to < 0 || to >= content.leaders.length) {
+      return { ok: false, message: "เลื่อนต่อไปไม่ได้แล้ว" };
+    }
+
+    const leaders = [...content.leaders];
+    const [moved] = leaders.splice(from, 1);
+    leaders.splice(to, 0, moved);
+
+    await saveContent({ ...content, leaders });
+    refreshSite();
+    return { ok: true, message: "สลับลำดับแล้ว" };
   } catch (error) {
     return { ok: false, message: (error as Error).message };
   }
@@ -219,6 +313,10 @@ export async function saveNewsAction(
     }
 
     await saveContent({ ...content, news });
+    if (id) {
+      const previous = content.news.find((item) => item.id === id);
+      if (previous) await deleteRemovedImages(previous.images, images);
+    }
     refreshSite();
     return { ok: true, message: id ? "แก้ไขข่าวแล้ว" : "เพิ่มข่าวใหม่แล้ว" };
   } catch (error) {
@@ -234,11 +332,13 @@ export async function deleteNewsAction(
     requireAuth();
     const content = await getContentFresh();
     const id = String(formData.get("id") ?? "");
+    const removed = content.news.find((item) => item.id === id);
 
     await saveContent({
       ...content,
       news: content.news.filter((item) => item.id !== id),
     });
+    if (removed) await deleteRemovedImages(removed.images, []);
     refreshSite();
     return { ok: true, message: "ลบข่าวแล้ว" };
   } catch (error) {

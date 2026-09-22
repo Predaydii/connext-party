@@ -16,8 +16,10 @@ import {
   FileInput,
   Label,
   Notice,
+  ReorderButtons,
   SaveButton,
   inputClass,
+  moveItem,
 } from "@/components/admin/ui";
 
 function NewsForm({
@@ -85,7 +87,7 @@ function NewsForm({
           <Label hint="ภาพแรกใช้เป็นภาพหน้าปก">รูปภาพ</Label>
           {kept.length > 0 && (
             <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-5">
-              {kept.map((src) => (
+              {kept.map((src, i) => (
                 <div key={src} className="relative">
                   <input type="hidden" name="keep" value={src} />
                   <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
@@ -95,6 +97,11 @@ function NewsForm({
                       fill
                       sizes="150px"
                       className="object-cover"
+                    />
+                    <ReorderButtons
+                      index={i}
+                      total={kept.length}
+                      onMove={(from, to) => setKept((prev) => moveItem(prev, from, to))}
                     />
                   </div>
                   <button
